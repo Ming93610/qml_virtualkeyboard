@@ -120,6 +120,52 @@ Item {
         y: -parent.y
         enabled: active && !keyboard.fullScreenMode && !__isRootItem
     }
+// 键盘拖拽/键盘不可拖拽
+//    property real mouseXTMP: 0
+//    property real mouseYTMP: 0
+//    MouseArea {
+//        anchors.fill: parent
+
+//        onPressed: {
+//            mouseXTMP = mouseX
+//            mouseYTMP = mouseY
+//        }
+//        onPositionChanged: {
+//            inputPanel.x = mouseX + inputPanel.x - mouseXTMP
+//            inputPanel.y = mouseY + inputPanel.y - mouseYTMP
+//        }
+//    }
+
+//    function setPosition(x,y) {
+//        inputPanel.x = x
+//        inputPanel.y = y
+//        console.log("LibKeyboard x:" + x + ",y:" + y)
+//    }
+
+    function setKeyboardColor(boardColor,keyColor,textColor) {
+        keyboard.style.setKeyboardColor(boardColor,keyColor,textColor)
+    }
+
+    function setKeyboardBackgroundColor(color) {
+        keyboard.style.setBackgroundColor(color)
+    }
+
+    function setKeysBackgroundColor(color) {
+        keyboard.style.setKeysBackgroundColor(color)
+    }
+
+    function setKeysTextColor(color) {
+        keyboard.style.setKeysTextColor(color)
+    }
+
+    function getKeyboardVersion() {
+        return "V1.0.4"
+    }
+
+    function setInputMode(mode) {
+        keyboard.customInputMethod = mode // ?
+        keyboard.defaultInputMethod = mode
+    }
 
     implicitHeight: keyboard.height
     Keyboard {

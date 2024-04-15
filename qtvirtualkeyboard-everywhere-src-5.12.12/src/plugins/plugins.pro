@@ -12,7 +12,7 @@ openwnn: SUBDIRS += openwnn
 pinyin: SUBDIRS += pinyin
 t9write: SUBDIRS += t9write
 tcime: SUBDIRS += tcime
-myscript: SUBDIRS += myscript
+#myscript: SUBDIRS += myscript
 thai: {
     SUBDIRS += thai
     !disable-hunspell: thai.depends += hunspell

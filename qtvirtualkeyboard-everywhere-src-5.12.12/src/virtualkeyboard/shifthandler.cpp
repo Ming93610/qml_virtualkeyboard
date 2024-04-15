@@ -48,7 +48,7 @@ public:
         inputContext(nullptr),
         sentenceEndingCharacters(QLatin1String(".!?") + QChar(Qt::Key_exclamdown) + QChar(Qt::Key_questiondown)),
         autoCapitalizationEnabled(false),
-        toggleShiftEnabled(false),
+        toggleShiftEnabled(true),
         shift(false),
         shiftChanged(false),
         capsLock(false),

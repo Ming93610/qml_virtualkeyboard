@@ -40,6 +40,11 @@ KeyboardStyle {
     readonly property real keyIconScale: scaleHint * 0.6
     readonly property string resourcePrefix: "qrc:/QtQuick/VirtualKeyboard/content/styles/default/"
 
+    property string keyBackColor: "white"
+    property string keyTextColor: "black"
+    property string backgroundColor: "#D2ECF5FC"
+    property int keyTextSize: 60
+
     readonly property string inputLocale: InputContext.locale
     property color inputLocaleIndicatorColor: "white"
     property Timer inputLocaleIndicatorHighlightTimer: Timer {
@@ -58,8 +63,26 @@ KeyboardStyle {
     keyboardRelativeTopMargin: 13 / keyboardDesignHeight
     keyboardRelativeBottomMargin: 86 / keyboardDesignHeight
 
+    function setKeyboardColor(boardColor,keyColor,textColor) {
+        backgroundColor = boardColor
+        keyBackColor = keyColor
+        keyTextColor = textColor
+    }
+
+    function setBackgroundColor(color) {
+        backgroundColor = color
+    }
+
+    function setKeysBackgroundColor(color) {
+        keyBackColor = color
+    }
+
+    function setKeysTextColor(color) {
+        keyTextColor = color
+    }
+
     keyboardBackground: Rectangle {
-        color: "black"
+        color: backgroundColor//"#D2ECF5FC"//"#1A000000"//"#EFEFEF" //"black"
     }
 
     keyPanel: KeyPanel {
@@ -67,28 +90,28 @@ KeyboardStyle {
         Rectangle {
             id: keyBackground
             radius: 5
-            color: "#383533"
+            color: keyBackColor //"#383533"
             anchors.fill: keyPanel
             anchors.margins: keyBackgroundMargin
             Text {
                 id: keySmallText
                 text: control.smallText
                 visible: control.smallTextVisible
-                color: "gray"
+                color: keyTextColor //"gray"
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.margins: keyContentMargin / 3
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 38 * scaleHint
+                    pixelSize: 40 * scaleHint
                     capitalization: control.uppercased ? Font.AllUppercase : Font.MixedCase
                 }
             }
             Text {
                 id: keyText
                 text: control.displayText
-                color: "white"
+                color: keyTextColor//"white"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 anchors.fill: parent
@@ -99,7 +122,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 52 * scaleHint
+                    pixelSize: keyTextSize * scaleHint
                     capitalization: control.uppercased ? Font.AllUppercase : Font.MixedCase
                 }
             }
@@ -137,7 +160,7 @@ KeyboardStyle {
         Rectangle {
             id: backspaceKeyBackground
             radius: 5
-            color: "#23211E"
+            color: keyBackColor //"#23211E"
             anchors.fill: backspaceKeyPanel
             anchors.margins: keyBackgroundMargin
             Image {
@@ -182,7 +205,7 @@ KeyboardStyle {
         Rectangle {
             id: languageKeyBackground
             radius: 5
-            color: "#35322f"
+            color: keyBackColor//"#35322f"
             anchors.fill: languageKeyPanel
             anchors.margins: keyBackgroundMargin
             Image {
@@ -227,7 +250,7 @@ KeyboardStyle {
         Rectangle {
             id: enterKeyBackground
             radius: 5
-            color: "#1e1b18"
+            color: keyBackColor//"#1e1b18"
             anchors.fill: enterKeyPanel
             anchors.margins: keyBackgroundMargin
             Image {
@@ -272,11 +295,11 @@ KeyboardStyle {
                 fontSizeMode: Text.HorizontalFit
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                color: "#80c342"
+                color: keyTextColor//"#80c342"
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 44 * scaleHint
+                    pixelSize: keyTextSize * scaleHint
                     capitalization: Font.AllUppercase
                 }
                 anchors.fill: parent
@@ -324,7 +347,7 @@ KeyboardStyle {
         Rectangle {
             id: hideKeyBackground
             radius: 5
-            color: "#1e1b18"
+            color: keyBackColor//"#1e1b18"
             anchors.fill: hideKeyPanel
             anchors.margins: keyBackgroundMargin
             Image {
@@ -369,7 +392,7 @@ KeyboardStyle {
         Rectangle {
             id: shiftKeyBackground
             radius: 5
-            color: "#1e1b18"
+            color: keyBackColor//"#1e1b18"
             anchors.fill: shiftKeyPanel
             anchors.margins: keyBackgroundMargin
             Image {
@@ -386,7 +409,7 @@ KeyboardStyle {
                     when: InputContext.capsLockActive
                     PropertyChanges {
                         target: shiftKeyBackground
-                        color: "#5a892e"
+                        color: keyBackColor//"#5a892e"
                     }
                     PropertyChanges {
                         target: shiftKeyIcon
@@ -436,19 +459,19 @@ KeyboardStyle {
         Rectangle {
             id: spaceKeyBackground
             radius: 5
-            color: "#35322f"
+            color: keyBackColor//"#35322f"
             anchors.fill: spaceKeyPanel
             anchors.margins: keyBackgroundMargin
             Text {
                 id: spaceKeyText
                 text: Qt.locale(InputContext.locale).nativeLanguageName
-                color: currentStyle.inputLocaleIndicatorColor
+                color: keyTextColor //currentStyle.inputLocaleIndicatorColor
                 Behavior on color { PropertyAnimation { duration: 250 } }
                 anchors.centerIn: parent
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 48 * scaleHint
+                    pixelSize: keyTextSize * scaleHint
                 }
             }
         }
@@ -477,13 +500,13 @@ KeyboardStyle {
         Rectangle {
             id: symbolKeyBackground
             radius: 5
-            color: "#1e1b18"
+            color: keyBackColor//"#1e1b18"
             anchors.fill: symbolKeyPanel
             anchors.margins: keyBackgroundMargin
             Text {
                 id: symbolKeyText
                 text: control.displayText
-                color: "white"
+                color: keyTextColor//"white"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 anchors.fill: parent
@@ -491,7 +514,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 44 * scaleHint
+                    pixelSize: keyTextSize * scaleHint
                     capitalization: Font.AllUppercase
                 }
             }
@@ -529,13 +552,13 @@ KeyboardStyle {
         Rectangle {
             id: modeKeyBackground
             radius: 5
-            color: "#1e1b18"
+            color: keyBackColor//"#1e1b18"
             anchors.fill: modeKeyPanel
             anchors.margins: keyBackgroundMargin
             Text {
                 id: modeKeyText
                 text: control.displayText
-                color: "white"
+                color: keyTextColor//"white"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 anchors.fill: parent
@@ -543,7 +566,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 44 * scaleHint
+                    pixelSize: keyTextSize * scaleHint
                     capitalization: Font.AllUppercase
                 }
             }
@@ -594,7 +617,7 @@ KeyboardStyle {
         Rectangle {
             id: hwrKeyBackground
             radius: 5
-            color: "#35322f"
+            color: keyBackColor//"#35322f"
             anchors.fill: handwritingKeyPanel
             anchors.margins: keyBackgroundMargin
             Image {
@@ -642,11 +665,11 @@ KeyboardStyle {
         Rectangle {
             id: characterPreviewBackground
             anchors.fill: parent
-            color: "#5d5b59"
+            color: keyBackColor//"#5d5b59"
             radius: 5
             Text {
                 id: characterPreviewText
-                color: "white"
+                color: keyTextColor//"white"
                 text: characterPreview.text
                 fontSizeMode: Text.HorizontalFit
                 horizontalAlignment: Text.AlignHCenter
@@ -662,6 +685,7 @@ KeyboardStyle {
         }
     }
 
+    //长按出现的预选
     alternateKeysListItemWidth: 99 * scaleHint
     alternateKeysListItemHeight: 150 * scaleHint
     alternateKeysListDelegate: Item {
@@ -671,7 +695,7 @@ KeyboardStyle {
         Text {
             id: listItemText
             text: model.text
-            color: "#868482"
+            color: keyTextColor;//"#868482"
             font {
                 family: fontFamily
                 weight: Font.Normal
@@ -684,34 +708,37 @@ KeyboardStyle {
             when: alternateKeysListItem.ListView.isCurrentItem
             PropertyChanges {
                 target: listItemText
-                color: "white"
+                color: keyTextColor//"white"
             }
         }
     }
     alternateKeysListHighlight: Rectangle {
-        color: "#5d5b59"
+        color: keyBackColor //"#5d5b59"
         radius: 5
     }
     alternateKeysListBackground: Rectangle {
-        color: "#1e1b18"
+        color: keyBackColor //"#1e1b18"
         radius: 5
     }
 
-    selectionListHeight: 85 * scaleHint
+
+    selectionListHeight: 120 * scaleHint
     selectionListDelegate: SelectionListItem {
         id: selectionListItem
-        width: Math.round(selectionListLabel.width + selectionListLabel.anchors.leftMargin * 2)
+        width: Math.round(selectionListLabel.width + selectionListLabel.anchors.leftMargin * 2) + 5
         Text {
+            //输入汉字时最上面的文字
             id: selectionListLabel
             anchors.left: parent.left
             anchors.leftMargin: Math.round((compactSelectionList ? 50 : 140) * scaleHint)
+            //anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             text: decorateText(display, wordCompletionLength)
-            color: "#80c342"
+            color: keyTextColor//"#80c342"
             font {
                 family: fontFamily
                 weight: Font.Normal
-                pixelSize: 44 * scaleHint
+                pixelSize: 52 * scaleHint
             }
             function decorateText(text, wordCompletionLength) {
                 if (wordCompletionLength > 0) {
@@ -720,12 +747,13 @@ KeyboardStyle {
                 return text
             }
         }
+        //上面待选汉字间的分隔矩形
         Rectangle {
             id: selectionListSeparator
             width: 4 * scaleHint
             height: 36 * scaleHint
             radius: 2
-            color: "#35322f"
+            color: "transparent" //keyBackColor//"#35322f"
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.left
         }
@@ -734,12 +762,12 @@ KeyboardStyle {
             when: selectionListItem.ListView.isCurrentItem
             PropertyChanges {
                 target: selectionListLabel
-                color: "white"
+                color: keyTextColor//"white"
             }
         }
     }
     selectionListBackground: Rectangle {
-        color: "#1e1b18"
+        color: backgroundColor//"transparent"//backgroundColor//keyBackColor//"#1e1b18"
     }
     selectionListAdd: Transition {
         NumberAnimation { property: "y"; from: wordCandidateView.height; duration: 200 }
@@ -762,7 +790,7 @@ KeyboardStyle {
         Rectangle {
             id: traceInputKeyPanelBackground
             radius: 5
-            color: "#35322f"
+            color: keyBackColor//"#35322f"
             anchors.fill: traceInputKeyPanel
             anchors.margins: keyBackgroundMargin
             Text {
@@ -946,7 +974,7 @@ KeyboardStyle {
     languageListDelegate: SelectionListItem {
         id: languageListItem
         width: languageNameTextMetrics.width * 17
-        height: languageNameTextMetrics.height + languageListLabel.anchors.topMargin + languageListLabel.anchors.bottomMargin
+        height: 5 + languageNameTextMetrics.height + languageListLabel.anchors.topMargin + languageListLabel.anchors.bottomMargin
         Text {
             id: languageListLabel
             anchors.left: parent.left
@@ -960,7 +988,7 @@ KeyboardStyle {
             font {
                 family: fontFamily
                 weight: Font.Normal
-                pixelSize: 44 * scaleHint
+                pixelSize: 50 * scaleHint
             }
         }
         TextMetrics {
@@ -968,7 +996,7 @@ KeyboardStyle {
             font {
                 family: fontFamily
                 weight: Font.Normal
-                pixelSize: 44 * scaleHint
+                pixelSize: 55 * scaleHint
             }
             text: "X"
         }
